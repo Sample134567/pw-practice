@@ -41,3 +41,22 @@ Then('I should be presented with a unsuccesful contact us message', async () => 
 
   await expect(bodyText).not.toMatch('Thank You for your Message!');
 })
+
+// Cucumber Expression
+
+When('I type a specific first name {string}', async (firstName: string) => {
+  await pageFixture.page.getByPlaceholder('First Name').fill(firstName);
+});
+
+When('I type a Specific last name {string}', async (lastName: string) => {
+  await pageFixture.page.getByPlaceholder('Last Name').fill(lastName);
+});
+
+When('I enter a specific email address {string}', async (emailAddress: string) => {
+  await pageFixture.page.getByPlaceholder('Email Address').fill(emailAddress);
+});
+
+
+When('I Type a specific text {string} and a number {int} within the comment input field', async (word: string, number: number) => { 
+  await pageFixture.page.getByPlaceholder('Comments').fill(word + " " + number);
+  });
