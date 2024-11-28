@@ -31,3 +31,13 @@ Then('I should be presented with a succesful contact us submission message', asy
 
   expect(text).toBe('Thank You for your Message!');
 });
+
+Then('I should be presented with a unsuccesful contact us message', async () => {
+  await pageFixture.page.waitForSelector('body');
+
+  const bodyElement = await pageFixture.page.locator("body");
+
+  const bodyText = await bodyElement.textContent();
+
+  await expect(bodyText).not.toMatch('Thank You for your Message!');
+})
