@@ -132,3 +132,8 @@ dist
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+misc.xml
+modules.xml
+pw-practice.iml
+vcs.xml
+settings.json
