@@ -92,3 +92,26 @@ When('I type a email address {string} and a {string}', async (email: string, com
   await pageFixture.page.getByPlaceholder('Email Address').fill(email);
   await pageFixture.page.getByPlaceholder('Comments').fill(comment);
 });
+
+Then('I should be presented with a header text {string}', async (message: string) =>  {
+  await pageFixture.page.waitForSelector("//h1 | //body", {state: 'visible'});
+
+  //get all elements
+  const elements = await pageFixture.page.locator("//h1 | //body").elementHandles();
+  
+  let foundElementText = '';
+
+  //loop through each of the elements
+  for(let element of elements) {
+      //get the inner text of the element
+      let text = await element.innerText();
+
+      //if statement to check whether text includes expected text
+      if(text.includes(message)) {
+          foundElementText = text;
+          break;
+      }
+  }
+
+  expect(foundElementText).toContain(message);
+});
