@@ -1,9 +1,7 @@
 Feature: WebdriverUniversity - Login Page
 
     Scenario Outline: Validate & invalid login
-        Given I navigate to WebdriverUniversity homepage
-        When I click on the login portal button
-        And I switch to new browser tab
+        Given I navigated to the WebdriverUniversity login page
         And I type a username <username>
         And I type a password <password>
         And I click on the login button

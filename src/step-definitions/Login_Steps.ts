@@ -1,8 +1,13 @@
-import { Then, When } from "@cucumber/cucumber";
+import { Given, Then, When } from "@cucumber/cucumber";
 import { pageFixture } from "./hooks/browserContextFixture";
 import { expect } from "@playwright/test";
 
 let alertText: string;
+
+Given('I navigated to the WebdriverUniversity login page', async () => {
+    await pageFixture.page.goto('https://webdriveruniversity.com/Login-Portal/index.html');
+});
+
 
 When('I type a username {word}', async (username: string) => {
     await pageFixture.page.getByPlaceholder('Username').fill(username);
