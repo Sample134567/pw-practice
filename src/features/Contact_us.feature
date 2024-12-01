@@ -1,3 +1,4 @@
+@regression @contact-us
 Feature: WebdriverUniversity.com
 
         Background: Pre condition
@@ -13,11 +14,12 @@ Feature: WebdriverUniversity.com
         #         And I click on the submit button
         #         Then I should be presented with a succesful contact us submission message
 
-        # Scenario: Invalid Contact Us form Submission
-        #         And I type a first name
-        #         And I type a last name
-        #         And I Type a comment
-        #         Then I should be presented with a unsuccesful contact us message
+        @smoke
+        Scenario: Invalid Contact Us form Submission
+                And I type a first name
+                And I type a last name
+                And I Type a comment
+                Then I should be presented with a unsuccesful contact us message
 
         # Scenario: Valid Contact Us Form Submission - Using specific Data
         #         And I type a specific first name "Sarah"
@@ -36,6 +38,7 @@ Feature: WebdriverUniversity.com
         #         And I click on the submit button
         #         Then I should be presented with a succesful contact us submission message
 
+        @smoke
         Scenario Outline: Validate Contact Us Page
                 And I type a first name <firstName> and a last name <lastName>
                 And I type a email address '<emailAddress>' and a '<comment>'
