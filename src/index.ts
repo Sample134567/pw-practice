@@ -20,7 +20,7 @@ const profiles: ProfileCommands = {
     smoke: `${common} --tags @smoke`,
     regression: `${common} --tags @regression`,
     login: `${common} --tags @login`,
-    contactUs: `${common} --tags @contact-us`,
+    contactUs: `${common} --tags @contactUs`,
 }
 
 // Get the third command-line argument and assign it to a variable
