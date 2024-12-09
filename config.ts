@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import * as path from 'path';
+import logger from './src/logger/logger';
 
 // Determine which environment file to load
 dotenv.config();
@@ -8,13 +9,6 @@ const envFile = path.resolve(__dirname, `./env/.env.${environment}`);
 
 // Load the appropriate .env file
 const result = dotenv.config({ path: envFile });
-
-// Checker if the .env file was successfully loaded
-if (result.error) {
-    console.error(`Failed to load .env file: ${envFile}`, result.error);
-} else {
-    console.log(`Loaded .env file: ${envFile}`);
-}
 
 // Create a configuration object for easy access to env variables
 export const config = {

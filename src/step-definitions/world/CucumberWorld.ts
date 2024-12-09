@@ -1,15 +1,15 @@
 import { World, setWorldConstructor } from "@cucumber/cucumber";
 
 export class CucumberWorld extends World {
-    // Base URL
+    //Base URL
     private url?: string;
 
-    // Person
+    //Person
     private firstName?: string;
     private lastName?: string;
     private emailAddress?: string;
 
-    // Setter for first name etc:
+    //Setter methods for URL, first name etc:
     setUrl(url: string) {
         this.url = url;
     }
@@ -26,7 +26,7 @@ export class CucumberWorld extends World {
         this.emailAddress = emailAddress;
     }
 
-    // Getter methods for first name etc:
+    //Getter methods for URL, first name etc:
     getURL() {
         return this.url;
     }
@@ -44,5 +44,5 @@ export class CucumberWorld extends World {
     }
 }
 
-// Tells Cucumber World to use our Custom World
+//Tells Cucumber World to use our Custom World
 setWorldConstructor(CucumberWorld);

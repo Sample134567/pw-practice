@@ -66,23 +66,29 @@ When('I Type a specific text {string} and a number {int} within the comment inpu
 });
 
 
-// Random Data - Faker
 
-When('I type a random first name', async () => {
-    const randomFirstName = faker.person.firstName();
-    await pageFixture.page.getByPlaceholder('First Name').fill(randomFirstName);
-
+//Random Data - Faker
+When('I type a random first name', async function (this: CucumberWorld) {
+  const randomFirstName = faker.person.firstName();
+  this.setFirstName(randomFirstName);
+  await pageFixture.page.getByPlaceholder('First Name').fill(randomFirstName);
 });
 
-When('I type a random last name', async () => {
+When('I type a random last name', async function (this: CucumberWorld) {
   const randomLastName = faker.person.lastName();
+  this.setLastName(randomLastName);
   await pageFixture.page.getByPlaceholder('Last Name').fill(randomLastName);
 });
 
-When('I enter a random email address', async () => {
+When('I enter a random email address', async function (this: CucumberWorld) {
   const randomEmail = faker.internet.email();
+  this.setEmailAddress(randomEmail);
   await pageFixture.page.getByPlaceholder('Email Address').fill(randomEmail);
-  await pageFixture.page.pause();
+});
+
+When('I type a random comment', async function (this: CucumberWorld) {
+  await pageFixture.page.getByPlaceholder('Comments').fill(`Please could you contact me? \n Thanks ${this.getFirstName()} ${this.getLastName()} ${this.getEmailAddress()}`);
+
 });
 
 //Scenario Outline
@@ -96,24 +102,24 @@ When('I type a email address {string} and a {string}', async (email: string, com
   await pageFixture.page.getByPlaceholder('Comments').fill(comment);
 });
 
-Then('I should be presented with a header text {string}', async (message: string) =>  {
-  await pageFixture.page.waitForSelector("//h1 | //body", {state: 'visible'});
+Then('I should be presented with a header text {string}', async (message: string) => {
+  await pageFixture.page.waitForSelector("//h1 | //body", { state: 'visible' });
 
   //get all elements
   const elements = await pageFixture.page.locator("//h1 | //body").elementHandles();
-  
+
   let foundElementText = '';
 
   //loop through each of the elements
-  for(let element of elements) {
-      //get the inner text of the element
-      let text = await element.innerText();
+  for (let element of elements) {
+    //get the inner text of the element
+    let text = await element.innerText();
 
-      //if statement to check whether text includes expected text
-      if(text.includes(message)) {
-          foundElementText = text;
-          break;
-      }
+    //if statement to check whether text includes expected text
+    if (text.includes(message)) {
+      foundElementText = text;
+      break;
+    }
   }
 
   expect(foundElementText).toContain(message);

@@ -6,13 +6,13 @@ Feature: WebdriverUniversity.com
                 When I Click on the contact us button
                 And I switch to new browser tab
   
-        Scenario: Valid Contact Us Form Submission
-                And I type a first name
-                And I type a last name
-                And I enter an email address
-                And I Type a comment
-                And I click on the submit button
-                Then I should be presented with a succesful contact us submission message
+        # Scenario: Valid Contact Us Form Submission
+        #         And I type a first name
+        #         And I type a last name
+        #         And I enter an email address
+        #         And I Type a comment
+        #         And I click on the submit button
+        #         Then I should be presented with a succesful contact us submission message
 
         # @smoke
         # Scenario: Invalid Contact Us form Submission
@@ -31,23 +31,24 @@ Feature: WebdriverUniversity.com
         #         Then I should be presented with a succesful contact us submission message
 
  
-        # Scenario: Valid Contact Us Form Submission - Using Random Data
-        #         And I type a random first name
-        #         And I type a random last name
-        #         And I enter a random email address
-        #         And I Type a comment
-        #         And I click on the submit button
-        #         Then I should be presented with a succesful contact us submission message
-
-        @smoke
-        Scenario Outline: Validate Contact Us Page
-                And I type a first name <firstName> and a last name <lastName>
-                And I type a email address '<emailAddress>' and a '<comment>'
+        Scenario: Valid Contact Us Form Submission - Using Random Data
+                And I type a random first name
+                And I type a random last name
+                And I enter a random email address
+                #And I Type a comment
+                And I type a random comment   
                 And I click on the submit button
-                Then I should be presented with a header text '<message>'
+                Then I should be presented with a succesful contact us submission message
 
-                Examples:
-                        | firstName | lastName | emailAddress               | comment                   | message                     |
-                        | John      | Jones    | john_jones@example.com     | Hello world               | Thank You for your Message! |
-                        | Mia       | Kahlifa  | mia_kahlifa123@example.com | Tester 21234              | Thank You for your Message! |
-                        | Lexi      | Lore     | lexi_lore                  | Do you do the best thing? | Invalid email address       |
+        # @smoke
+        # Scenario Outline: Validate Contact Us Page
+        #         And I type a first name <firstName> and a last name <lastName>
+        #         And I type a email address '<emailAddress>' and a '<comment>'
+        #         And I click on the submit button
+        #         Then I should be presented with a header text '<message>'
+
+        #         Examples:
+        #                 | firstName | lastName | emailAddress               | comment                   | message                     |
+        #                 | John      | Jones    | john_jones@example.com     | Hello world               | Thank You for your Message! |
+        #                 | Mia       | Kahlifa  | mia_kahlifa123@example.com | Tester 21234              | Thank You for your Message! |
+        #                 | Lexi      | Lore     | lexi_lore                  | Do you do the best thing? | Invalid email address       |
