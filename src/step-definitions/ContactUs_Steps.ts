@@ -1,9 +1,12 @@
-import { Given, Then, When } from "@cucumber/cucumber";
+import { Then, When } from "@cucumber/cucumber";
 import { pageFixture } from "./hooks/browserContextFixture";
 import { expect } from "@playwright/test";
 import { faker } from "@faker-js/faker";
+import { CucumberWorld } from "./world/CucumberWorld";
+import logger from "../logger/logger";
 
-When('I type a first name', async () => {
+When('I type a first name', async function (this: CucumberWorld) {
+  logger.info(`Base URL stored in Cucumber World: ${this.getURL()}`);
   await pageFixture.page.getByPlaceholder('First Name').fill('Joe');
 });
 

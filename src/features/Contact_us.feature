@@ -39,15 +39,15 @@ Feature: WebdriverUniversity.com
         #         And I click on the submit button
         #         Then I should be presented with a succesful contact us submission message
 
-        # @smoke
-        # Scenario Outline: Validate Contact Us Page
-        #         And I type a first name <firstName> and a last name <lastName>
-        #         And I type a email address '<emailAddress>' and a '<comment>'
-        #         And I click on the submit button
-        #         Then I should be presented with a header text '<message>'
+        @smoke
+        Scenario Outline: Validate Contact Us Page
+                And I type a first name <firstName> and a last name <lastName>
+                And I type a email address '<emailAddress>' and a '<comment>'
+                And I click on the submit button
+                Then I should be presented with a header text '<message>'
 
-        #         Examples:
-        #                 | firstName | lastName | emailAddress               | comment                   | message                     |
-        #                 | John      | Jones    | john_jones@example.com     | Hello world               | Thank You for your Message! |
-        #                 | Mia       | Kahlifa  | mia_kahlifa123@example.com | Tester 21234              | Thank You for your Message! |
-        #                 | Lexi      | Lore     | lexi_lore                  | Do you do the best thing? | Invalid email address       |
+                Examples:
+                        | firstName | lastName | emailAddress               | comment                   | message                     |
+                        | John      | Jones    | john_jones@example.com     | Hello world               | Thank You for your Message! |
+                        | Mia       | Kahlifa  | mia_kahlifa123@example.com | Tester 21234              | Thank You for your Message! |
+                        | Lexi      | Lore     | lexi_lore                  | Do you do the best thing? | Invalid email address       |

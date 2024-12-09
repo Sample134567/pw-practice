@@ -1,8 +1,6 @@
 import * as winston from 'winston';
 import colors from '@colors/colors';
-
-import dotenv from 'dotenv';
-dotenv.config({ path: './env/.env'});
+import { config } from '../../config';
 
 //Define the custom format
 const myFormat = winston.format.printf(({ level, message, timestamp }) => {
@@ -23,7 +21,7 @@ const myFormat = winston.format.printf(({ level, message, timestamp }) => {
 
 //Create a logger instance
 const logger = winston.createLogger({
-    level: process.env.LOG_LEVEL || 'info',
+    level: config.logLevel,
     format: winston.format.combine(
         winston.format.timestamp(),
         myFormat

@@ -2,16 +2,7 @@ import { After, AfterAll, Before, BeforeAll, Status } from "@cucumber/cucumber";
 import { Browser, BrowserType, chromium, firefox, webkit } from "@playwright/test";
 import { pageFixture } from "./browserContextFixture";
 import { setGlobalSettings } from "../../utils/playwright-timeouts";
-
-import { config as loadEnv } from "dotenv"
-const env = loadEnv({ path: './env/.env' });
-
-const config = {
-    headless: env.parsed?.HEADLESS === 'true',
-    browser: env.parsed?.UI_AUTOMATION_BROWSER || 'chromium',
-    width: parseInt(env.parsed?.BROWSER_WIDTH || '1920'),
-    height: parseInt(env.parsed?.BROWSER_HEIGHT || '1080')
-}
+import { config } from "../../../config";
 
 const browsers: { [key: string]: BrowserType } = {
     'chromium': chromium,

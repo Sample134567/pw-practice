@@ -1,11 +1,12 @@
 import { Given, Then, When } from "@cucumber/cucumber";
 import { pageFixture } from "./hooks/browserContextFixture";
 import { expect } from "@playwright/test";
+import { config } from "../../config";
 
 let alertText: string;
 
 Given('I navigated to the WebdriverUniversity login page', async () => {
-    await pageFixture.page.goto('https://webdriveruniversity.com/Login-Portal/index.html');
+    await pageFixture.page.goto(config.URL + '/Login-Portal/index.html');
 });
 
 
@@ -31,4 +32,4 @@ When('I click on the login button', async () => {
 
 Then('I should be presented with an alert box which contains text {string}', async (expectedAlertText: string) => {
     expect(alertText).toBe(expectedAlertText);
-  });
+});
