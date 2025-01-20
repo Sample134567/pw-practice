@@ -3,6 +3,7 @@ import { Browser, BrowserType, chromium, firefox, webkit } from "@playwright/tes
 import { pageFixture } from "./browserContextFixture";
 import { setGlobalSettings } from "../../utils/playwright-timeouts";
 import { config } from "../../../config";
+import { PageManager } from "../../page-objects/base/PageManager";
 
 const browsers: { [key: string]: BrowserType } = {
     'chromium': chromium,
@@ -47,6 +48,9 @@ Before(async function () {
         browserInstance = await initializeBrowserContext(config.browser);
         console.log(`Browser context initialize for: ${config.browser}`)
         await initializePage();
+
+        this.pageManager = new PageManager();
+        this.basePage = this.pageManager.createBasePage();
     }
     catch (error) {
         console.log(`Browser context initialize Failed: `, error)
@@ -68,7 +72,7 @@ After(async function ({ pickle, result }) {
             console.error('pageFixture.page is not defined');
         }
     }
-    if(browserInstance) {
+    if (browserInstance) {
         await pageFixture.page?.close();
         await browserInstance.close();
     }

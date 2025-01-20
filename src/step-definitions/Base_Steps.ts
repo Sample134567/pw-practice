@@ -18,7 +18,8 @@ When('I switch to new browser tab', async () => {
 
 Given('I navigate to WebdriverUniversity homepage', async function (this: CucumberWorld) {
   try {
-    await pageFixture.page.goto(config.URL);
+    // await pageFixture.page.goto(config.URL);
+    await this.basePage.navigate(config.URL);
     logger.info('Accessing URL: ' + config.URL);
     this.setUrl(config.URL)
   } catch (error: any) {

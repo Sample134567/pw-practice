@@ -1,6 +1,11 @@
-import { World, setWorldConstructor } from "@cucumber/cucumber";
+import { World, setWorldConstructor, IWorldOptions } from "@cucumber/cucumber";
+import { PageManager } from "../../page-objects/base/PageManager";
+import { BasePage } from "../../page-objects/base/BasePage";
 
 export class CucumberWorld extends World {
+    public pageManager: PageManager;
+    public basePage: BasePage
+
     //Base URL
     private url?: string;
 
@@ -8,6 +13,12 @@ export class CucumberWorld extends World {
     private firstName?: string;
     private lastName?: string;
     private emailAddress?: string;
+
+    constructor({attach, log, parameters}: IWorldOptions) {
+        super({attach, log, parameters} as any); // pass the options to the world constructor
+        this.pageManager = new PageManager();
+        this.basePage = this.pageManager.createBasePage(); 
+    }
 
     //Setter methods for URL, first name etc:
     setUrl(url: string) {
