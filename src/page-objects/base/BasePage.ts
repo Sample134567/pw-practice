@@ -1,14 +1,14 @@
-import {Page, Locator} from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 import { pageFixture } from "../../step-definitions/hooks/browserContextFixture";
-import { promises } from "dns";
+import { config } from "../../../config";
 
-export class BasePage{
-    get page() : Page {
+export class BasePage {
+    get page(): Page {
         return pageFixture.page;
     }
 
 
-    public async navigate(url: string): Promise<void> { 
+    public async navigate(url: string): Promise<void> {
         await this.page.goto(url);
     }
 
@@ -25,5 +25,17 @@ export class BasePage{
     public async waitAndClickSelector(selector: string): Promise<void> {
         await this.page.waitForSelector(selector);
         await this.page.click(selector);
+    }
+
+    public async switchToNewTab(): Promise<void> {
+        await this.page.context().waitForEvent('page');
+
+        const allPages = await this.page.context().pages();
+
+        pageFixture.page = allPages[allPages.length - 1];
+
+        await this.page.bringToFront();
+
+        await this.page.setViewportSize({ width: config.width, height: config.height });
     }
 }
