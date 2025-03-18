@@ -7,64 +7,54 @@ import logger from "../logger/logger";
 
 When('I type a first name', async function (this: CucumberWorld) {
   logger.info(`Base URL stored in Cucumber World: ${this.getURL()}`);
-  await pageFixture.page.getByPlaceholder('First Name').fill('Joe');
+  await this.contactUsPage.fillFirstName('Joe');
 });
 
-When('I type a last name', async () => {
-  await pageFixture.page.getByPlaceholder('Last Name').fill('Blogs');
+When('I type a last name', async function(this: CucumberWorld)  {
+  await this.contactUsPage.fillLastName('Bloggs');
 });
 
-When('I enter an email address', async () => {
-  await pageFixture.page.getByPlaceholder('Email Address').fill('joe_blog123@example.com');
+When('I enter an email address', async function (this: CucumberWorld) {
+  await this.contactUsPage.fillemailAddress('G6PdM@example.com');
 });
 
-When('I Type a comment', async () => {
-  await pageFixture.page.getByPlaceholder('Comments').fill('Hello World');
+When('I Type a comment', async function (this: CucumberWorld)  {
+  await this.contactUsPage.fillComment('Please could you contact me?')
 });
 
-When('I click on the submit button', async () => {
-  await pageFixture.page.waitForSelector('input[value="SUBMIT"]');
-
-  await pageFixture.page.click('input[value="SUBMIT"]');
+When('I click on the submit button', async function(this: CucumberWorld)  {
+  await this.contactUsPage.clickOnSubmitButton();
 });
 
-Then('I should be presented with a succesful contact us submission message', async () => {
-  await pageFixture.page.waitForSelector('#contact_reply h1', { timeout: 60000 });
-
-  const text = await pageFixture.page.innerText('#contact_reply h1');
-
-  expect(text).toBe('Thank You for your Message!');
+Then('I should be presented with a succesful contact us submission message', async function(this: CucumberWorld) {
+  const successMessage = await this.contactUsPage.getSuccessfulMessage();
+  expect(successMessage).toBe('Thank You for your Message!');
 });
 
-Then('I should be presented with a unsuccesful contact us message', async () => {
-  await pageFixture.page.waitForSelector('body');
-
-  const bodyElement = await pageFixture.page.locator("body");
-
-  const bodyText = await bodyElement.textContent();
-
-  await expect(bodyText).not.toMatch('Thank You for your Message!');
+Then('I should be presented with a unsuccesful contact us message', async function(this: CucumberWorld) {
+const errorMessage = await this.contactUsPage.getErrorMessage();
+  await expect(errorMessage).not.toMatch('Thank You for your Message!');
 })
 
 // Cucumber Expression
 
-When('I type a specific first name {string}', async (firstName: string) => {
-  await pageFixture.page.getByPlaceholder('First Name').fill(firstName);
+When('I type a specific first name {string}', async function(this: CucumberWorld, firstName: string) {
+  await this.contactUsPage.fillFirstName(firstName);
 });
 
-When('I type a Specific last name {string}', async (lastName: string) => {
-  await pageFixture.page.getByPlaceholder('Last Name').fill(lastName);
+When('I type a Specific last name {string}', async function(this: CucumberWorld, lastName: string)  {
+  await this.contactUsPage.fillLastName(lastName);
+
 });
 
-When('I enter a specific email address {string}', async (emailAddress: string) => {
-  await pageFixture.page.getByPlaceholder('Email Address').fill(emailAddress);
+When('I enter a specific email address {string}', async function(this: CucumberWorld, emailAddress: string)  {
+  await this.contactUsPage.fillemailAddress(emailAddress);
 });
 
 
-When('I Type a specific text {string} and a number {int} within the comment input field', async (word: string, number: number) => {
-  await pageFixture.page.getByPlaceholder('Comments').fill(word + " " + number);
+When('I Type a specific text {string} and a number {int} within the comment input field', async function (this: CucumberWorld,word: string, number: number) {
+  await this.contactUsPage.fillComment(word + " " + number);
 });
-
 
 
 //Random Data - Faker
